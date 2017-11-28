@@ -1,0 +1,58 @@
+---
+title: "SST data"
+author: "SST crisis team"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SST data}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## It's hot
+
+This plot of all recent days of SST fro 26 November make it seem 
+like 17 degrees and above is much more normal around Tasmania than in the past. 
+
+
+```{r intro-sst}
+path <- "~/Git/sstdata/sstdata_output"
+library(raster)
+oisst_nov <- brick(file.path(path, "oisst_1982_2017-11.grd"))
+asub <- which(format(getZ(oisst_nov), "%d") == "26")
+oisst_nov26 <- subset(oisst_nov, asub)
+names(oisst_nov26) <- format(getZ(oisst_nov)[asub], "%Y")
+library(palr)
+rng <- range(c(cellStats(oisst_nov26, min), cellStats(oisst_nov26, max)))
+plot(subset(oisst_nov26, seq(1, nlayers(oisst_nov26), by = 3)), col = sstPal(52), zlim = rng)
+# par(mfrow = grDevices::n2mfrow(nlayers(oisst_nov26)), mar = rep(0, 4))
+# for (i in seq_len(nlayers(oisst_nov26))) {
+#   image(oisst_nov26[[i]], col = sstPal(52), zlim = rng, axes = FALSE)
+#   text(146, -37, gsub("X", "", names(oisst_nov26)[i]))
+# }
+# 
+
+```
+
+But, it was very hot on the 26 November and it had been hot for several days. 
+
+Let's look at monthly data to see what the signal is like. 
+
+```{r}
+library(raster)
+m_oisst_nov <- brick(file.path(path, "oisst_monthly_1982_2017-11.grd"))
+library(palr)
+rng <- range(c(cellStats(m_oisst_nov, min), cellStats(m_oisst_nov, max)))
+plot(subset(m_oisst_nov, 22:nlayers(m_oisst_nov)), col = sstPal(52), zlim = rng)
+
+
+```
