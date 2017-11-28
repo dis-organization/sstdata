@@ -3,4 +3,8 @@
 sstdata
 =======
 
-Code is in inst/
+Exploring SST.
+
+Code: *inst/scripts/extractSST.R*
+
+Description of source data: *sstdata\_output/output\_readme.md*
