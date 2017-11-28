@@ -13,16 +13,16 @@ gfiles <- ghrsstfiles()
 ghrsst <- readghrsst(dplyr::filter(gfiles, format(date, "%Y-%m") == "2017-11")$date,
                      xylim = ex) - 273.15
 ghrsst <- setZ(ghrsst, dplyr::filter(gfiles, format(date, "%Y-%m") == "2017-11")$date)
-writeRaster(ghrsst, "output/ghrsst_2017-11.grd", overwrite = TRUE)
+writeRaster(ghrsst, "sstdata_output/ghrsst_2017-11.grd", overwrite = TRUE)
 
 
 ofiles <- sstfiles()
 oisst <- readsst(dplyr::filter(gfiles, format(date, "%m") == "11")$date,
                  xylim = ex)
-writeRaster(oisst, "output/oisst_1982_2017-11.grd")
+writeRaster(oisst, "sstdata_output/oisst_1982_2017-11.grd")
 
 ## monthly from OISST
 dts <- getZ(oisst)
 
 month_oisst <- brick(lapply(split(seq_along(dts), format(dts, "%Y")), function(i) mean(subset(oisst, i))))
-writeRaster(month_oisst, "output/oisst_monthly_1982_2017-11.grd")
+writeRaster(month_oisst, "sstdata_output/oisst_monthly_1982_2017-11.grd")

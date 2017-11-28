@@ -1,4 +1,6 @@
 .Rproj.user
 .Rhistory
 .RData
-output/*
+sstdata_output/*.grd
+sstdata_output/*.gri
+
