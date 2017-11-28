@@ -15,6 +15,11 @@ ghrsst <- readghrsst(dplyr::filter(gfiles, format(date, "%Y-%m") == "2017-11")$d
 ghrsst <- setZ(ghrsst, dplyr::filter(gfiles, format(date, "%Y-%m") == "2017-11")$date)
 writeRaster(ghrsst, "sstdata_output/ghrsst_2017-11.grd", overwrite = TRUE)
 
+ghrsst_nov26 <- readghrsst(dplyr::filter(gfiles, format(date, "%m-%d") == "11-26")$date,
+                     xylim = ex) - 273.15
+ghrsst_nov26 <- setZ(ghrsst_nov26, dplyr::filter(gfiles, format(date, "%m-%d") == "11-26")$date)
+writeRaster(ghrsst_nov26 , "sstdata_output/ghrsst_2002_2017-11-26.grd", overwrite = TRUE)
+
 
 ofiles <- sstfiles()
 oisst <- readsst(dplyr::filter(gfiles, format(date, "%m") == "11")$date,

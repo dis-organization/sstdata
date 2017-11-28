@@ -5,6 +5,7 @@
 In directory **sstdata_output/**
 
 * ghrsst_2017-11.grd is all days of November 2017 from GHRSST
+* ghrsst_2002_2017-11-26.grd is all 26-November days from GHRSST 
 * oisst_1982_2017-11.grd is all November days from OISST (since 1982)
 * oisst_monthly_1982_2017-11.grd is the OISST days summarized to monthly values 
 

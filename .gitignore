@@ -4,3 +4,4 @@
 sstdata_output/*.grd
 sstdata_output/*.gri
 
+inst/doc
